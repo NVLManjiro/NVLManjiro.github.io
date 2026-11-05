@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Veille Cyber — Mathys Policarpe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@900&family=Caveat:wght@400..700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .feeds{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:30px;margin-top:40px}
+        .feed{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:30px}
+        .feed header{display:flex;justify-content:space-between;align-items:baseline;gap:10px;border-bottom:2px solid #333;padding-bottom:12px;margin-bottom:10px}
+        .feed h2{font-family:var(--giant);font-size:1.8rem;color:var(--y);text-transform:uppercase;font-weight:900}
+        .feed header span{color:#666;font-size:.75rem;text-transform:uppercase;letter-spacing:1px}
+        .art{padding:14px 0;border-bottom:1px solid #2a2a2a}.art:last-child{border-bottom:0}
+        .art a{text-decoration:none;font-weight:600;line-height:1.4;display:block;transition:color .3s}.art a:hover{color:var(--y)}
+        .art time{color:#666;font-size:.78rem;font-family:var(--mono)}
+        .msg{color:var(--g);font-size:.9rem}
+        .live{display:inline-flex;align-items:center;gap:8px;color:var(--y);font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+        .live i{width:8px;height:8px;border-radius:50%;background:var(--y);animation:p 1.5s infinite alternate}
+        @keyframes p{to{opacity:.3}}
+        .meth{margin-top:60px}
+    </style>
+</head>
+<body>
+<nav class="nav">
+    <div><button class="burger" aria-label="Menu"><span></span><span></span><span></span></button></div>
+    <a href="index.html" class="logo">Mathys</a>
+    <div class="nav-r">
+        <a href="index.html" class="pill">Accueil</a>
+        <a href="index.html#/contact" class="pill out">Contact</a>
+    </div>
+</nav>
+
+<div class="menu">
+    <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="index.html#/competences">Compétences</a></li>
+        <li><a href="index.html#/projets">Projets &amp; Labs</a></li>
+        <li><a href="veille.html">Veille Cyber</a></li>
+        <li><a href="index.html#/contact">Contact</a></li>
+    </ul>
+</div>
+
+<main class="proj" style="max-width:1200px">
+    <a class="back" href="index.html">← Retour à l'accueil</a>
+    <span class="tag" style="display:block;margin-top:20px">Veille technologique</span>
+    <h1>Moniteur de veille cyber</h1>
+    <p class="intro">Flux en direct de trois sources de référence : l'institutionnel français (CERT-FR), l'actualité cyber francophone (Zataz) et l'actualité internationale (The Hacker News).</p>
+    <span class="live"><i></i> Flux en direct</span>
+
+    <div class="feeds">
+        <section class="feed"><header><h2>CERT-FR</h2><span>ANSSI · alertes officielles</span></header><div id="list-cert"><p class="msg">Chargement…</p></div></section>
+        <section class="feed"><header><h2>Zataz</h2><span>Cyber &amp; données</span></header><div id="list-zataz"><p class="msg">Chargement…</p></div></section>
+        <section class="feed"><header><h2>The Hacker News</h2><span>International</span></header><div id="list-hacker"><p class="msg">Chargement…</p></div></section>
+    </div>
+
+    <div class="box meth">
+        <h3>Méthodologie de veille</h3>
+        <ul>
+            <li><b>Sources :</b> CERT-FR (vulnérabilités, alertes), Zataz (actualité francophone), The Hacker News (menaces internationales).</li>
+            <li><b>Collecte :</b> flux RSS, affichés ici en direct et envoyés chaque matin par email via mon <a href="index.html#/p/veille" style="color:var(--y)">bot Python / GitHub Actions</a>.</li>
+            <li><b>Tri :</b> filtrage par mots-clés pour ne garder que les alertes critiques.</li>
+            <li><b>Objectif :</b> repérer les vulnérabilités qui concernent les outils que j'administre (Windows Server, Linux, pfSense, Wazuh…) et appliquer les correctifs.</li>
+        </ul>
+    </div>
+    <!-- À COMPLÉTER : ajoute ici une synthèse datée (ex. « Veille de novembre 2026 : 3 faits marquants, ce que j'en retiens, impact sur mes projets »). -->
+</main>
+<footer>© Mathys Policarpe — Portfolio BTS SIO SISR</footer>
+
+<script>
+const FEEDS=[['https://www.cert.ssi.gouv.fr/feed/','list-cert'],['https://www.zataz.com/feed/','list-zataz'],['https://feeds.feedburner.com/TheHackersNews','list-hacker']];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+async function load([url,id]){
+    const box=document.getElementById(id);
+    try{
+        const r=await fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(url)),d=await r.json();
+        if(d.status!=='ok')throw 0;
+        box.innerHTML=d.items.slice(0,6).map(a=>{
+            const t=new Date(a.pubDate.replace(' ','T')+(a.pubDate.includes('T')?'':'Z'));
+            const s=isNaN(t)?'':t.toLocaleDateString('fr-FR')+' · '+t.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+            return `<div class="art"><a href="${esc(a.link)}" target="_blank" rel="noopener">${esc(a.title)}</a><time>${s}</time></div>`}).join('');
+    }catch(e){box.innerHTML='<p class="msg">Flux momentanément indisponible. Réessaie plus tard.</p>'}
+}
+FEEDS.forEach(load);
+</script>
+<script src="script.js"></script>
+<script src="gt.js"></script>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mathys Policarpe — Portfolio BTS SIO SISR</title>
+    <meta
+      name="description"
+      content="Portfolio de Mathys Policarpe, étudiant BTS SIO option SISR : systèmes, réseaux et cybersécurité."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@900&family=Caveat:wght@400..700&family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23111'/%3E%3Ctext x='50' y='72' font-size='64' text-anchor='middle' fill='%23d4ff00' font-family='sans-serif' font-weight='900'%3EM%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="nav">
+      <div>
+        <button class="burger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <a href="#/" class="logo">Mathys</a>
+      <div class="nav-r">
+        <a href="veille.html" class="pill out">Veille</a>
+        <a href="#/contact" class="pill">Contact</a>
+      </div>
+    </nav>
+
+    <div class="menu">
+      <ul>
+        <li><a href="#/">Accueil</a></li>
+        <li><a href="#/competences">Compétences</a></li>
+        <li><a href="#/projets">Projets &amp; Labs</a></li>
+        <li><a href="veille.html">Veille Cyber</a></li>
+        <li><a href="#/contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div id="home">
+      <header class="hero">
+        <p class="sub">
+          Étudiant BTS SIO SISR — Systèmes, Réseaux &amp; Cybersécurité —
+          Ensitech Nantes
+        </p>
+        <div class="tc">
+          <h1 class="giant">MATHYS<br />POLICARPE</h1>
+          <div class="pillimg">
+            <img src="image/image-pill.png" alt="Mathys Policarpe" data-hide />
+          </div>
+        </div>
+        <div class="hero-cta">
+          <a href="#/projets" class="pill">Voir mes projets</a>
+          <a href="cv.pdf" download="CV-Mathys-Policarpe.pdf" class="pill out"
+            >Télécharger le CV</a
+          >
+        </div>
+      </header>
+
+      <section class="sec rv" id="about">
+        <div class="sh">
+          <h2>À propos</h2>
+          <div class="line"></div>
+        </div>
+        <p class="about">
+          Passionné par les infrastructures et la défense des systèmes
+          d'information, je construis pour mieux protéger. Ce portfolio
+          documente mes réalisations : segmentation réseau, Active Directory,
+          durcissement, supervision, détection d'intrusions (SIEM) et résilience
+          des données (PRA). Chaque projet dispose d'une fiche détaillée et
+          d'une documentation à télécharger.
+        </p>
+      </section>
+
+      <section class="sec rv" id="competences">
+        <div class="sh">
+          <h2>Compétences</h2>
+          <div class="line"></div>
+        </div>
+        <div class="skills" id="skills"></div>
+      </section>
+
+      <div class="band" aria-hidden="true" translate="no">
+        <div
+          class="track"
+          data-w="Kali Linux,Wireshark,Cisco,Réseaux,Cybersécurité,pfSense,Active Directory,Wazuh,VMware,Windows Server,VLAN,OpenVAS,Docker,Prometheus,Grafana,GLPI,Veeam,OpenVPN"
+        ></div>
+      </div>
+      <section class="sec rv" id="projets">
+        <div class="sh">
+          <h2>Projets &amp; Labs</h2>
+          <div class="line"></div>
+        </div>
+        <div class="filters" id="filters"></div>
+        <div class="grid" id="grid"></div>
+      </section>
+
+      <section class="sec rv" id="veille">
+        <div class="sh">
+          <h2>Veille</h2>
+          <div class="line"></div>
+        </div>
+        <div class="grid">
+          <a class="card" href="veille.html">
+            <span class="tag">Veille technologique</span>
+            <h3>Moniteur de veille cyber</h3>
+            <p>Flux en direct du CERT-FR, de Zataz et de The Hacker News.</p>
+            <span class="go">Ouvrir la veille →</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="sec rv" id="contact">
+        <div class="sh">
+          <h2>Contact</h2>
+          <div class="line"></div>
+        </div>
+        <div class="cg">
+          <div>
+            <p class="lead">
+              Un projet, un stage ou une alternance ? Écrivez-moi.
+            </p>
+            <div class="cd">
+              <p>Nantes, France</p>
+              <a href="mailto:mathys.policarpe@ensitech.eu"
+                >mathys.policarpe@ensitech.eu</a
+              >
+              <a
+                href="https://www.linkedin.com/in/mathys-policarpe-702016349/"
+                target="_blank"
+                rel="noopener"
+                >LinkedIn</a
+              >
+              <a
+                href="https://github.com/NVLManjiro"
+                target="_blank"
+                rel="noopener"
+                >GitHub</a
+              >
+            </div>
+          </div>
+          <!-- Remplace VOTRE_CLE par ton identifiant Formspree -->
+          <form
+            class="form"
+            action="https://formspree.io/f/VOTRE_CLE"
+            method="POST"
+          >
+            <div class="row">
+              <input name="name" placeholder="Nom" required aria-label="Nom" />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                required
+                aria-label="Email"
+              />
+            </div>
+            <textarea
+              name="message"
+              rows="5"
+              placeholder="Message..."
+              required
+              aria-label="Message"
+            ></textarea>
+            <button class="send">Envoyer</button>
+          </form>
+        </div>
+      </section>
+      <div class="band dark" aria-hidden="true" translate="no">
+        <div
+          class="track"
+          data-w="SOC,SIEM,Hardening,Pentest,LUKS,RAID,HPE ProLiant,Packet Tracer,GPO,LAPS,DMZ,Linux,Supervision,PRA,Veille cyber,Python,GitHub Actions"
+        ></div>
+      </div>
+    </div>
+
+    <main class="proj" id="proj" hidden></main>
+    <footer>© Mathys Policarpe — Portfolio BTS SIO SISR</footer>
+
+    <script src="projects.js"></script>
+    <script src="script.js"></script>
+    <script src="gt.js"></script>
+    <script>
+      document.querySelectorAll(".track").forEach((t) => {
+        const s = t.dataset.w
+          .split(",")
+          .map((w) => `<span>${w}</span>`)
+          .join("");
+        t.innerHTML = s + s;
+      });
+      const $ = (id) => document.getElementById(id),
+        esc = (s) =>
+          s.replace(
+            /[&<>]/g,
+            (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c],
+          );
+      const SK = [
+        [
+          "sys",
+          "Administration systèmes",
+          "Windows Server, Linux, Active Directory, GLPI",
+        ],
+        [
+          "net",
+          "Réseaux & infrastructure",
+          "pfSense, VLAN, routage, VMware, HPE ProLiant",
+        ],
+        [
+          "sec",
+          "Cybersécurité (SOC)",
+          "Wazuh, OpenVAS, LUKS, Wireshark, veille",
+        ],
+        ["obs", "Observabilité & MCO", "Prometheus, Grafana, Docker, Veeam"],
+      ];
+      $("skills").innerHTML = SK.map(
+        (s) =>
+          `<div class="skill"><div><h3>${s[1]}</h3><p>${s[2]}</p></div><b>${P.filter((p) => p.cat.includes(s[0])).length}<small>projets</small></b></div>`,
+      ).join("");
+
+      function draw(c) {
+        $("grid").innerHTML = P.filter((p) => c === "all" || p.cat.includes(c))
+          .map(
+            (p) =>
+              `<a class="card" href="#/p/${p.id}"><span class="tag">${p.tag}</span><h3>${p.title}</h3><p>${p.short}</p><span class="stack">${p.stack}</span><span class="go">Voir le projet →</span></a>`,
+          )
+          .join("");
+        $("filters")
+          .querySelectorAll("button")
+          .forEach((b) => b.classList.toggle("on", b.dataset.c === c));
+      }
+      $("filters").innerHTML = Object.entries(CATS)
+        .map(([k, v]) => `<button data-c="${k}">${v}</button>`)
+        .join("");
+      $("filters").addEventListener(
+        "click",
+        (e) => e.target.dataset.c && draw(e.target.dataset.c),
+      );
+      draw("all");
+
+      const fig = (m) =>
+        `<figure><img src="${m[1]}" alt="${m[2]}" onerror="this.outerHTML='<div class=ph>Capture à ajouter : ${m[1]}</div>'"><figcaption>${m[2]}</figcaption></figure>`;
+      const ul = (a) => a.map((r) => `<li>${r}</li>`).join("");
+
+      const userHtml = (p) => {
+        const u = p.ug;
+        return `<div class="box"><h3>À qui s'adresse ce guide</h3><p>${u.who}</p></div>
+        <h2 class="h3y">Avant de commencer</h2><div class="box" style="margin-top:0"><ul>${ul(u.need)}</ul></div>
+        <h2 class="h3y">Utilisation pas à pas</h2>
+        ${u.steps.map((t, n) => `<section class="step"><div class="num">${String(n + 1).padStart(2, "0")}</div><div><h2>${t[0]}</h2><p>${t[1]}</p>${t[2] ? `<pre><code>${esc(t[2])}</code></pre>` : ""}</div></section>`).join("")}
+        <h2 class="h3y">En cas de problème</h2><table class="tbl"><thead><tr><th>Situation</th><th>Que faire</th></tr></thead><tbody>${u.help.map((b) => `<tr><td>${b[0]}</td><td>${b[1]}</td></tr>`).join("")}</tbody></table>
+        <div class="box"><h3>Contact</h3><p><a href="mailto:mathys.policarpe@ensitech.eu" style="color:var(--y)">mathys.policarpe@ensitech.eu</a></p></div>`;
+      };
+
+      function project(p, tab) {
+        const k = P.indexOf(p);
+        document.title = p.title + " — Mathys Policarpe";
+
+        let ficheHtml = "";
+        if (p.goal || p.env) {
+          ficheHtml += `<div class="fiche"><div class="box">`;
+          if (p.goal) ficheHtml += `<h3>Objectif</h3><p>${p.goal}</p>`;
+          if (p.env)
+            ficheHtml += `<h3 style="margin-top:18px">Environnement</h3><p>${p.env}</p>`;
+          ficheHtml += `</div><div class="box skl"><h3>Compétences mobilisées</h3><ul>${p.skills.map((s) => `<li><b>${s}</b>${SKL[s] || ""}</li>`).join("")}</ul></div></div>`;
+        }
+
+        $("proj").innerHTML = `
+        <a class="back" href="#/projets">← Tous les projets</a>
+        <span class="tag" style="display:block;margin-top:20px">${p.tag}</span>
+        <h1>${p.title}</h1>
+        <div class="chips">${p.skills.map((s) => `<span class="chip y">${s}</span>`).join("")}${p.stack
+          .split(" · ")
+          .map((s) => `<span class="chip">${s}</span>`)
+          .join("")}</div>
+        <p class="intro">${p.intro}</p>
+        <div class="dl">
+            <button class="pill" id="dlmd">⬇ Documentation technique (.md)</button>
+            ${p.ug ? '<button class="pill" id="dlug">⬇ Documentation utilisateur (.md)</button>' : ""}
+            <button class="pill out" id="pdft">Exporter en PDF (technique)</button>
+            ${p.ug ? '<button class="pill out" id="pdfu">Exporter en PDF (utilisateur)</button>' : ""}
+            ${p.gh ? `<a class="pill out" href="${p.gh}" target="_blank" rel="noopener">Code sur GitHub</a>` : ""}
+        </div>
+        ${p.ug ? `<div class="tabs" role="tablist"><button role="tab" class="on" data-t="tech">Documentation technique</button><button role="tab" data-t="user">Documentation utilisateur</button></div>` : ""}
+        <div id="tech">
+        ${ficheHtml}
+        ${p.concepts ? `<h2 class="h3y">Notions clés</h2><div class="cgrid">${p.concepts.map((c) => `<div><b>${c[0]}</b><span>${c[1]}</span></div>`).join("")}</div>` : ""}
+        ${
+          p.table
+            ? `<h2 class="h3y">Comparatif</h2><table class="tbl"><thead><tr>${p.table[0].map((h) => `<th>${h}</th>`).join("")}</tr></thead><tbody>${p.table
+                .slice(1)
+                .map(
+                  (r) => `<tr>${r.map((c) => `<td>${c}</td>`).join("")}</tr>`,
+                )
+                .join("")}</tbody></table>`
+            : ""
+        }
+        <h2 class="h3y">Réalisation</h2>
+        ${p.steps
+          .map(
+            (t, n) =>
+              `<section class="step"><div class="num">${String(n + 1).padStart(2, "0")}</div><div><h2>${t[0]}</h2><p>${t[1]}</p>${t[2] ? `<pre><code>${esc(t[2])}</code></pre>` : ""}${p.imgs
+                .filter((m) => m[0] === n)
+                .map(fig)
+                .join("")}</div></section>`,
+          )
+          .join("")}
+        ${p.pbs ? `<h2 class="h3y">Problèmes rencontrés</h2><table class="tbl"><thead><tr><th>Problème</th><th>Solution</th></tr></thead><tbody>${p.pbs.map((b) => `<tr><td>${b[0]}</td><td>${b[1]}</td></tr>`).join("")}</tbody></table>` : ""}
+        ${p.result ? `<div class="box"><h3>Résultats</h3><ul>${ul(p.result)}</ul></div>` : ""}
+        ${p.recos ? `<div class="box"><h3>Bonnes pratiques retenues</h3><ul>${ul(p.recos)}</ul></div>` : ""}
+        </div>
+        <div id="user" hidden>${p.ug ? userHtml(p) : ""}</div>
+        <div class="pn">${k > 0 ? `<a class="pill out" href="#/p/${P[k - 1].id}">← ${P[k - 1].title}</a>` : "<span></span>"}${k < P.length - 1 ? `<a class="pill out" href="#/p/${P[k + 1].id}">${P[k + 1].title} →</a>` : ""}</div>
+    `;
+
+        const dl = (f, name) => {
+          const a = document.createElement("a");
+          a.href = URL.createObjectURL(
+            new Blob([f(p)], { type: "text/markdown;charset=utf-8" }),
+          );
+          a.download = name + p.id + ".md";
+          a.click();
+          URL.revokeObjectURL(a.href);
+        };
+        $("dlmd").onclick = () => dl(docMd, "Documentation-technique-");
+        if (p.ug)
+          $("dlug").onclick = () => dl(docUser, "Documentation-utilisateur-");
+
+        const show = (t) => {
+          $("tech").hidden = t !== "tech";
+          $("user").hidden = t !== "user";
+          $("proj")
+            .querySelectorAll(".tabs button")
+            .forEach((b) => {
+              const on = b.dataset.t === t;
+              b.classList.toggle("on", on);
+              b.setAttribute("aria-selected", on);
+            });
+          history.replaceState(
+            null,
+            "",
+            "#/p/" + p.id + (t === "user" ? "/user" : ""),
+          );
+        };
+        const tabs = $("proj").querySelector(".tabs");
+        if (tabs)
+          tabs.addEventListener(
+            "click",
+            (e) => e.target.dataset.t && show(e.target.dataset.t),
+          );
+        show(tab === "user" && p.ug ? "user" : "tech");
+
+        /* Export PDF : on affiche l'onglet voulu, on imprime, puis on restaure l'affichage */
+        const pdf = (t) => {
+          const prev = $("user").hidden ? "tech" : "user",
+            title = document.title;
+          show(t);
+          document.title =
+            "Documentation-" +
+            (t === "user" ? "utilisateur" : "technique") +
+            "-" +
+            p.id;
+          const back = () => {
+            show(prev);
+            document.title = title;
+            removeEventListener("afterprint", back);
+          };
+          addEventListener("afterprint", back);
+          print();
+        };
+        $("pdft").onclick = () => pdf("tech");
+        if (p.ug) $("pdfu").onclick = () => pdf("user");
+      }
+
+      function route() {
+        const [a, b, c] = location.hash.replace(/^#\/?/, "").split("/"),
+          p = a === "p" && P.find((x) => x.id === b);
+        if (p) {
+          $("home").hidden = true;
+          $("proj").hidden = false;
+          project(p, c);
+          scrollTo(0, 0);
+          return;
+        }
+        if (a === "veille") {
+          location.replace("veille.html");
+          return;
+        }
+        document.title = "Mathys Policarpe — Portfolio BTS SIO SISR";
+        $("home").hidden = false;
+        $("proj").hidden = true;
+        initReveal();
+        const t = a && $(a);
+        setTimeout(
+          () => (t ? t.scrollIntoView({ behavior: "smooth" }) : scrollTo(0, 0)),
+          30,
+        );
+      }
+
+      addEventListener("hashchange", route);
+      document.addEventListener("click", (e) => {
+        const a = e.target.closest('a[href^="#/"]');
+        if (a && a.getAttribute("href") === location.hash) route();
+      });
+      route();
+
+      /* Formulaire : tant que la clé Formspree n'est pas renseignée, on ouvre le client mail */
+      document.querySelector(".form").addEventListener("submit", (e) => {
+        const f = e.target;
+        if (!f.action.includes("VOTRE_CLE")) return;
+        e.preventDefault();
+        const d = new FormData(f);
+        location.href =
+          "mailto:mathys.policarpe@ensitech.eu?subject=" +
+          encodeURIComponent("Contact portfolio : " + d.get("name")) +
+          "&body=" +
+          encodeURIComponent(
+            d.get("message") +
+              "\n\n" +
+              d.get("name") +
+              " <" +
+              d.get("email") +
+              ">",
+          );
+      });
+    </script>
+  </body>
+</html>

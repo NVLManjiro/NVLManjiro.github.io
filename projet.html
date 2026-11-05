@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Projet — Mathys Policarpe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@900&family=Caveat:wght@400..700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body>
+<nav class="nav"><div><button class="burger" aria-label="Menu"><span></span><span></span><span></span></button></div>
+<a href="index.html" class="logo">Mathys</a><div class="nav-r"><a href="index.html#contact" class="pill">Contact</a></div></nav>
+<div class="menu"><ul><li><a href="index.html">Accueil</a></li><li><a href="index.html#competences">Compétences</a></li><li><a href="index.html#projects">Projets &amp; Labs</a></li><li><a href="veille.html">Veille Cyber</a></li><li><a href="index.html#contact">Contact</a></li></ul></div>
+<main class="proj" id="proj"></main>
+<script src="projects.js"></script><script src="script.js"></script><script src="gt.js"></script>
+<script>
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const id=new URLSearchParams(location.search).get('p'),i=P.findIndex(p=>p.id===id),p=P[i]||P[0],k=P.indexOf(p);
+document.title=p.title+' — Mathys Policarpe';
+const fig=([,src,cap])=>`<figure><img src="${src}" alt="${cap}" onerror="this.outerHTML='<div class=ph>Capture à ajouter : ${src}</div>'"><figcaption>${cap}</figcaption></figure>`;
+document.getElementById('proj').innerHTML=`<a class="back" href="index.html#projects">← Tous les projets</a><span class="tag" style="display:block;margin-top:20px">${p.tag}</span><h1>${p.title}</h1>
+<div class="chips">${p.skills.map(s=>`<span class="chip y">${s}</span>`).join('')}${p.stack.split(' · ').map(s=>`<span class="chip">${s}</span>`).join('')}</div>
+<p class="intro">${p.intro}</p>
+<div class="dl"><button class="pill" id="dlmd">⬇ Télécharger la documentation (.md)</button><button class="pill out" onclick="print()">Exporter en PDF</button>${p.gh?`<a class="pill out" href="${p.gh}" target="_blank" rel="noopener">Code sur GitHub</a>`:''}</div>
+${p.steps.map((t,n)=>`<section class="step"><div class="num">${String(n+1).padStart(2,'0')}</div><div><h2>${t[0]}</h2><p>${t[1]}</p>${t[2]?`<pre><code>${esc(t[2])}</code></pre>`:''}${p.imgs.filter(m=>m[0]===n).map(fig).join('')}</div></section>`).join('')}
+${p.recos.length?`<div class="box"><h3>Bonnes pratiques retenues</h3><ul>${p.recos.map(r=>`<li>${r}</li>`).join('')}</ul></div>`:''}
+<div class="pn">${k>0?`<a class="pill out" href="projet.html?p=${P[k-1].id}">← ${P[k-1].title}</a>`:'<span></span>'}${k<P.length-1?`<a class="pill out" href="projet.html?p=${P[k+1].id}">${P[k+1].title} →</a>`:''}</div>`;
+document.getElementById('dlmd').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([docMd(p)],{type:'text/markdown;charset=utf-8'}));a.download='Documentation-'+p.id+'.md';a.click();URL.revokeObjectURL(a.href)};
+</script></body></html>
