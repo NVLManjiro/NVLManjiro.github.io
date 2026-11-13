@@ -804,3 +804,57 @@ figcaption {
     transform: translateX(-50%);
   }
 }
+/* Onglets Documentation technique / utilisateur */
+.tabs {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 6px;
+  margin: 28px 0 24px;
+  background: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+
+.tabs button {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.65);
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.tabs button:hover:not(.on) {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.tabs button.on {
+  background: var(--y, #d4ff00);
+  color: #111111;
+}
+
+.tabs button:focus-visible {
+  outline: 2px solid var(--y, #d4ff00);
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .tabs {
+    display: flex;
+    width: 100%;
+    border-radius: 18px;
+  }
+
+  .tabs button {
+    flex: 1;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+  }
+}
