@@ -254,8 +254,7 @@
         return `<div class="box"><h3>À qui s'adresse ce guide</h3><p>${u.who}</p></div>
         <h2 class="h3y">Avant de commencer</h2><div class="box" style="margin-top:0"><ul>${ul(u.need)}</ul></div>
         <h2 class="h3y">Utilisation pas à pas</h2>
-        ${u.steps.map((t, n) => `<section class="step"><div class="num">${String(n + 1).padStart(2, "0")}</div><div><h2>${t[0]}</h2><p>${t[1]}</p>${t[2] ? `<pre><code>${t[2] ? `<pre><code>${esc(t[2])}</code></pre>` : ""}${(u.imgs || []).filter((m) => m[0] === n).map(fig).join("")}</div></section>`).join("")})
-        <h2 class="h3y">En cas de problème</h2><table class="tbl"><thead><tr><th>Situation</th><th>Que faire</th></tr></thead><tbody>${u.help.map((b) => `<tr><td>${b[0]}</td><td>${b[1]}</td></tr>`).join("")}</tbody></table>
+${u.steps.map((t, n) => `<section class="step"><div class="num">${String(n + 1).padStart(2, "0")}</div><div><h2>${t[0]}</h2><p>${t[1]}</p>${t[2] ? `<pre><code>${esc(t[2])}</code></pre>` : ""}${(u.imgs \vert{}\vert{} []).filter((m) => m[0] === n).map(fig).join("")}</div></section>`).join("")} ```  **Ce qui posait problème :** Le début de la condition `${t[2] ? `<pre><code>` était dupliqué juste avant `${t[2] ? `<pre><code>${esc(t[2])}</code></pre>` : ""}`, ce qui laissait un backtick (`` ` ``) et un opérateur ternaire (`?`) non fermés.        <h2 class="h3y">En cas de problème</h2><table class="tbl"><thead><tr><th>Situation</th><th>Que faire</th></tr></thead><tbody>${u.help.map((b) => `<tr><td>${b[0]}</td><td>${b[1]}</td></tr>`).join("")}</tbody></table>
         <div class="box"><h3>Contact</h3><p><a href="mailto:mathys.policarpe@ensitech.eu" style="color:var(--y)">mathys.policarpe@ensitech.eu</a></p></div>`;
       };
 
