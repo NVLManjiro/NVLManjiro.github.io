@@ -720,3 +720,65 @@ P.find((p) => p.id === "raid").steps.push([
   "Création du volume logique",
   "Dans le menu du contrôleur de stockage, création d'une matrice : sélection des disques physiques, choix du niveau de RAID selon le besoin (voir comparatif), validation. Le système voit ensuite le volume comme un seul disque.",
 ]);
+/* ===== GLPI : documentation utilisateur (onglet "Documentation utilisateur") =====
+   À COLLER TOUT À LA FIN de projects.js, après le bloc RAID. */
+
+Object.assign(P.find((p) => p.id === "glpi"), {
+  ug: {
+    who: "Tout utilisateur disposant d'un compte GLPI avec le profil <b>Self-Service</b> : il peut déclarer un incident, faire une demande d'assistance et suivre l'avancement de ses tickets, sans passer par mail ou téléphone.",
+    need: [
+      "Un navigateur web récent (Chrome, Firefox ou Edge).",
+      "L'adresse du portail GLPI fournie par le support.",
+      "Un identifiant et un mot de passe personnels.",
+    ],
+    steps: [
+      [
+        "Se connecter au portail",
+        "1. Ouvrir le navigateur et saisir l'adresse du portail GLPI.<br>2. Renseigner son <b>identifiant</b> et son <b>mot de passe</b>, puis cliquer sur <b>Se connecter</b>.<br>3. La page « Besoin d'aide ? Une question ? » s'affiche : c'est l'accueil du portail Self-Service.",
+      ],
+      [
+        "Créer une demande d'assistance",
+        "1. Cliquer sur <b>Signaler un incident</b> (quelque chose ne marche plus) ou <b>Demander un service</b> (vous avez besoin de quelque chose).<br>2. Choisir la <b>catégorie</b> (matériel, logiciel, réseau, accès) et l'<b>urgence</b> réelle.<br>3. Saisir un <b>titre</b> court et une <b>description</b> détaillée : message d'erreur exact, depuis quand, sur quel poste, ce qui a déjà été essayé.<br>4. Joindre une capture d'écran si besoin, puis cliquer sur <b>Envoyer</b>. Un numéro de ticket est attribué.",
+      ],
+      [
+        "Suivre l'avancement de ses tickets",
+        "1. Depuis l'accueil, ouvrir <b>Voir vos tickets</b>.<br>2. Repérer le <b>statut</b> : <b>Nouveau</b> (enregistré), <b>En cours</b> (pris en charge par un technicien), <b>En attente</b> (le support attend une information de votre part), <b>Résolu</b> (solution apportée), <b>Clos</b> (terminé).<br>3. Cliquer sur un ticket pour consulter l'historique des échanges et les pièces jointes.",
+      ],
+      [
+        "Répondre et valider la solution",
+        "1. Ouvrir le ticket et écrire un message dans la zone de réponse pour ajouter une information.<br>2. Quand le statut passe à <b>Résolu</b> et que tout fonctionne : cliquer sur <b>Approuver la solution</b>, le ticket est clos.<br>3. Si le problème persiste : <b>Refuser la solution</b> en expliquant pourquoi, le ticket est rouvert.",
+      ],
+    ],
+    imgs: [
+      [0, "image/glpi_user_home.png", "Portail d'accueil Self-Service (Vue Utilisateur)"],
+      [2, "image/glpi_user_tickets.png", "Suivi des tickets et statuts en temps réel côté demandeur"],
+    ],
+    help: [
+      ["Mot de passe oublié", "Contacter le support : seul un administrateur peut le réinitialiser."],
+      ["Je ne vois pas mes tickets", "Vérifier que vous êtes connecté avec le bon compte et que le filtre de statut n'exclut pas les tickets clos."],
+      ["Ticket « En attente » depuis longtemps", "Le support attend une information de votre part : ouvrir le ticket et répondre."],
+      ["Le problème persiste après « Résolu »", "Refuser la solution en expliquant pourquoi : le ticket est rouvert."],
+      ["Je dois modifier mon ticket après l'envoi", "Ce n'est pas possible, mais vous pouvez ajouter une réponse avec les nouvelles informations."],
+    ],
+  },
+});
+
+/* Export Markdown de la documentation utilisateur (bouton « Documentation utilisateur (.md) ») */
+function docUser(p) {
+  const u = p.ug,
+    txt = (s) => s.replace(/<br\s*\/?>/gi, "\n").replace(/<[^>]+>/g, "");
+  let s =
+    "# " + p.title + " : guide utilisateur\n\n**Auteur :** Mathys Policarpe — BTS SIO SISR\n**Outil :** " +
+    p.stack + "\n\n";
+  s += "## À qui s'adresse ce guide\n\n" + txt(u.who) + "\n\n";
+  s += "## Avant de commencer\n\n" + u.need.map((n) => "- " + n).join("\n") + "\n\n";
+  u.steps.forEach((t, i) => {
+    s += "## Étape " + (i + 1) + " : " + t[0] + "\n\n" + txt(t[1]) + "\n\n";
+    (u.imgs || []).filter((m) => m[0] === i).forEach((m) => (s += "![" + m[2] + "](" + m[1] + ")\n\n"));
+  });
+  s +=
+    "## En cas de problème\n\n| Situation | Que faire |\n|---|---|\n" +
+    u.help.map((b) => "| " + b[0] + " | " + b[1] + " |").join("\n") +
+    "\n\n## Contact\n\nmathys.policarpe@ensitech.eu\n";
+  return s;
+}
