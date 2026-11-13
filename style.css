@@ -804,57 +804,44 @@ figcaption {
     transform: translateX(-50%);
   }
 }
-/* Onglets Documentation technique / utilisateur */
+/* --- Boutons d'export et téléchargement --- */
+.dl {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+/* --- Système d'onglets (Documentation technique / utilisateur) --- */
 .tabs {
   display: inline-flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  background: #111;
   padding: 6px;
-  margin: 28px 0 24px;
-  background: #161616;
-  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 24px;
 }
 
 .tabs button {
-  appearance: none;
-  border: none;
   background: transparent;
-  color: rgba(255, 255, 255, 0.65);
-  font-family: "Inter", sans-serif;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: inherit;
   font-size: 0.9rem;
-  font-weight: 600;
-  padding: 10px 22px;
+  font-weight: 500;
+  padding: 10px 24px;
   border-radius: 999px;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  transition: all 0.2s ease;
 }
 
 .tabs button:hover:not(.on) {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .tabs button.on {
-  background: var(--y, #d4ff00);
-  color: #111111;
-}
-
-.tabs button:focus-visible {
-  outline: 2px solid var(--y, #d4ff00);
-  outline-offset: 2px;
-}
-
-@media (max-width: 600px) {
-  .tabs {
-    display: flex;
-    width: 100%;
-    border-radius: 18px;
-  }
-
-  .tabs button {
-    flex: 1;
-    padding: 10px 14px;
-    font-size: 0.85rem;
-  }
+  background: #d4ff00; /* Ton jaune néon */
+  color: #111;
+  font-weight: 700;
 }
