@@ -446,65 +446,90 @@
         <div class="box"><h3>Contact</h3><p><a href="mailto:mathys.policarpe@ensitech.eu" style="color:var(--y)">mathys.policarpe@ensitech.eu</a></p></div>`;
       };
 
-      function project(p, tab) {
-        const k = P.indexOf(p);
-        document.title = p.title + " — Mathys Policarpe";
+      /* Pop-up Export PDF : téléchargement direct (.pdf) OU impression */
+        const modal = $("pdfModal"),
+          directBtn = $("pdfDirectBtn"),
+          printBtn = $("pdfPrintBtn"),
+          closeBtn = $("pdfCloseBtn"),
+          descEl = $("pdfModalDesc");
 
-        let ficheHtml = "";
-        if (p.goal || p.env) {
-          ficheHtml += `<div class="fiche"><div class="box">`;
-          if (p.goal) ficheHtml += `<h3>Objectif</h3><p>${p.goal}</p>`;
-          if (p.env)
-            ficheHtml += `<h3 style="margin-top:18px">Environnement</h3><p>${p.env}</p>`;
-          ficheHtml += `</div><div class="box skl"><h3>Compétences mobilisées</h3><ul>${p.skills.map((s) => `<li><b>${s}</b>${SKL[s] || ""}</li>`).join("")}</ul></div></div>`;
-        }
+        let pendingType = "tech";
 
-        $("proj").innerHTML = `
-        <a class="back" href="#/projets">← Tous les projets</a>
-        <span class="tag" style="display:block;margin-top:20px">${p.tag}</span>
-        <h1>${p.title}</h1>
-        <div class="chips">${p.skills.map((s) => `<span class="chip y">${s}</span>`).join("")}${p.stack
-          .split(" · ")
-          .map((s) => `<span class="chip">${s}</span>`)
-          .join("")}</div>
-        <p class="intro">${p.intro}</p>
-        <div class="dl">
-            <button class="pill" id="dlmd">⬇ Documentation technique (.md)</button>
-            ${p.ug ? '<button class="pill" id="dlug">⬇ Documentation utilisateur (.md)</button>' : ""}
-            <button class="pill out" id="pdft">Exporter en PDF (technique)</button>
-            ${p.ug ? '<button class="pill out" id="pdfu">Exporter en PDF (utilisateur)</button>' : ""}
-            ${p.gh ? `<a class="pill out" href="${p.gh}" target="_blank" rel="noopener">Code sur GitHub</a>` : ""}
-        </div>
-${p.ug ? `<div class="tabs" role="tablist"><button role="tab" class="pill on" data-t="tech">Documentation technique</button><button role="tab" class="pill out" data-t="user">Documentation utilisateur</button></div>` : ""}        <div id="tech">
-        ${ficheHtml}
-        ${p.concepts ? `<h2 class="h3y">Notions clés</h2><div class="cgrid">${p.concepts.map((c) => `<div><b>${c[0]}</b><span>${c[1]}</span></div>`).join("")}</div>` : ""}
-        ${
-          p.table
-            ? `<h2 class="h3y">Comparatif</h2><table class="tbl"><thead><tr>${p.table[0].map((h) => `<th>${h}</th>`).join("")}</tr></thead><tbody>${p.table
-                .slice(1)
-                .map(
-                  (r) => `<tr>${r.map((c) => `<td>${c}</td>`).join("")}</tr>`,
-                )
-                .join("")}</tbody></table>`
-            : ""
-        }
-        <h2 class="h3y">Réalisation</h2>
-        ${p.steps
-          .map(
-            (t, n) =>
-              `<section class="step"><div class="num">${String(n + 1).padStart(2, "0")}</div><div><h2>${t[0]}</h2><p>${t[1]}</p>${t[2] ? `<pre><code>${esc(t[2])}</code></pre>` : ""}${p.imgs
-                .filter((m) => m[0] === n)
-                .map(fig)
-                .join("")}</div></section>`,
-          )
-          .join("")}
-        ${p.pbs ? `<h2 class="h3y">Problèmes rencontrés</h2><table class="tbl"><thead><tr><th>Problème</th><th>Solution</th></tr></thead><tbody>${p.pbs.map((b) => `<tr><td>${b[0]}</td><td>${b[1]}</td></tr>`).join("")}</tbody></table>` : ""}
-        ${p.result ? `<div class="box"><h3>Résultats</h3><ul>${ul(p.result)}</ul></div>` : ""}
-        ${p.recos ? `<div class="box"><h3>Bonnes pratiques retenues</h3><ul>${ul(p.recos)}</ul></div>` : ""}
-        </div>
-        <div id="user" hidden>${p.ug ? userHtml(p) : ""}</div>
-        <div class="pn">${k > 0 ? `<a class="pill out" href="#/p/${P[k - 1].id}">← ${P[k - 1].title}</a>` : "<span></span>"}${k < P.length - 1 ? `<a class="pill out" href="#/p/${P[k + 1].id}">${P[k + 1].title} →</a>` : ""}</div>
-    `;
+        const closeModal = () => {
+          modal.hidden = true;
+        };
+
+        const openPdfChoice = (t) => {
+          pendingType = t;
+          descEl.textContent =
+            (t === "user" ? "Documentation utilisateur" : "Documentation technique") +
+            " — " +
+            p.title;
+          modal.hidden = false;
+        };
+
+        const runPrint = (t) => {
+          closeModal();
+          const prev = $("user").hidden ? "tech" : "user",
+            oldTitle = document.title;
+          show(t);
+          document.title =
+            "Documentation-" +
+            (t === "user" ? "utilisateur" : "technique") +
+            "-" +
+            p.id;
+          const back = () => {
+            show(prev);
+            document.title = oldTitle;
+            removeEventListener("afterprint", back);
+          };
+          addEventListener("afterprint", back);
+          print();
+        };
+
+        const runDirectDownload = (t) => {
+          closeModal();
+          const prev = $("user").hidden ? "tech" : "user";
+          show(t);
+          const targetEl = t === "user" ? $("user") : $("tech");
+          const fileName =
+            "Documentation-" +
+            (t === "user" ? "utilisateur" : "technique") +
+            "-" +
+            p.id +
+            ".pdf";
+
+          if (typeof html2pdf === "function") {
+            html2pdf()
+              .set({
+                margin: 10,
+                filename: fileName,
+                image: { type: "jpeg", quality: 0.95 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+              })
+              .from(targetEl)
+              .save()
+              .then(() => show(prev))
+              .catch(() => {
+                show(prev);
+                runPrint(t);
+              });
+          } else {
+            show(prev);
+            runPrint(t);
+          }
+        };
+
+        directBtn.onclick = () => runDirectDownload(pendingType);
+        printBtn.onclick = () => runPrint(pendingType);
+        closeBtn.onclick = closeModal;
+        modal.onclick = (e) => {
+          if (e.target === modal) closeModal();
+        };
+
+        $("pdft").onclick = () => openPdfChoice("tech");
+        if (p.ug) $("pdfu").onclick = () => openPdfChoice("user");
 
         const dl = (f, name) => {
           const a = document.createElement("a");
