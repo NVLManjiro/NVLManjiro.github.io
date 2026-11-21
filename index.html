@@ -361,7 +361,17 @@
         </div>
       </details>
     </footer>
-
+<div class="pdf-modal" id="pdfModal" hidden role="dialog" aria-modal="true" aria-labelledby="pdfModalTitle">
+  <div class="pdf-dialog">
+    <h3 id="pdfModalTitle">Exporter en PDF</h3>
+    <p id="pdfModalDesc">Choisissez comment vous souhaitez récupérer la documentation.</p>
+    <div class="pdf-actions">
+      <button type="button" class="pill" id="pdfDirectBtn">⬇ Télécharger le fichier .pdf</button>
+      <button type="button" class="pill out" id="pdfPrintBtn">🖨 Ouvrir l'aperçu / Imprimer</button>
+    </div>
+    <button type="button" class="pdf-close" id="pdfCloseBtn">Annuler</button>
+  </div>
+</div>
     <script src="projects.js"></script>
     <script src="script.js"></script>
     <script src="gt.js"></script>
