@@ -845,3 +845,63 @@ figcaption {
   color: #111;
   font-weight: 700;
 }
+/* Modale de choix PDF (Téléchargement direct vs Impression) */
+.pdf-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.78);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+}
+.pdf-modal[hidden] {
+  display: none;
+}
+.pdf-dialog {
+  background: var(--card);
+  border: 1px solid var(--bd);
+  border-radius: 10px;
+  padding: 28px;
+  max-width: 440px;
+  width: 100%;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+}
+.pdf-dialog h3 {
+  font-family: var(--giant);
+  font-size: 2rem;
+  color: var(--y);
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.pdf-dialog p {
+  color: var(--g);
+  font-size: 0.92rem;
+  margin-bottom: 22px;
+}
+.pdf-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.pdf-close {
+  margin-top: 14px;
+  background: none;
+  border: 0;
+  color: var(--g);
+  font-family: var(--body);
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: underline;
+  width: 100%;
+}
+.pdf-close:hover {
+  color: var(--w);
+}
+@media print {
+  .pdf-modal {
+    display: none !important;
+  }
+}
